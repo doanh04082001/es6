@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Some and Every es 6</title>
+  </head>
+  <body>
+    // some chả về kiểu dữ liệu boolean (true hoặc false) 
+    // some có nghĩa là
+    một và. trong 1 mảng có 1 phần tử thỏa mãn điều kiện thì chả về true và
+    không quan tâm những phần tử phía sau 
+    // every có nghĩa là tất cả. trong 1
+    mảng phải có tất cả các phần tử thỏa mãn điều kiện thì mới chả về true, chỉ
+    cần 1 phần tử không đủ đk thì sẽ false
+
+    <script>
+      const numbers = [15, 2, 3, 4, 5];
+      var some = numbers.some((number) => {
+        return number > 14;
+      });
+      var every = numbers.every((number) => {
+        return number > 14;
+      });
+      console.log("hàm some" + some);
+      console.log("hàm every" + every);
+    </script>
+  </body>
+</html>

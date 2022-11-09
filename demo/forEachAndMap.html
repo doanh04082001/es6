@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // vòng lặp forEach()
+      var images = [
+        { height: 10, width: 30 },
+        { height: 20, width: 90 },
+        { height: 54, width: 32 },
+      ];
+      var newArray = [];
+      images.forEach(function (item) {
+        newArray.push(item.height * item.width);
+      });
+      console.log(newArray);
+      // vòng lặp map
+      let oldArr = [1, 2, 3, 4];
+      var newArs = oldArr.map(function (newArr) {
+        // vòng lặp map cần sử dụng return (nếu k return sẽ underfine)
+        return newArr * 2;
+      });
+      console.log(newArs);
+      var images = [
+        { height: "34px", width: "39px" },
+        { height: "54px", width: "19px" },
+        { height: "83px", width: "75px" },
+      ];
+
+      var heights = images.map(function (image) {
+        return image.height;
+      });
+      console.log(heights);
+
+      var trips = [
+        { distance: 34, time: 10 },
+        { distance: 90, time: 50 },
+        { distance: 59, time: 25 },
+      ];
+
+      var speeds = trips.map(function (trip) {
+        return trip.distance + "/" + trip.time;
+      });
+      console.log(speeds);
+
+      function pluck(array,property){
+        property = array.map(function(arr){
+            return (arr.color)
+        })
+        return (property);
+      }
+      var color;
+      var paints = [ { color: 'red' }, { color: 'blue' }, { color: 'yellow' }];
+      pluck(paints,color);
+    </script>
+  </body>
+</html>

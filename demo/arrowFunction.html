@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //cách viết base
+        // var myFunction = function(a){
+        //     return a
+        // }
+
+
+        // //cách viết es 6
+        // //khi code đơn giản chỉ chạy 1 dòng thì có thể bỏ return cùng với dấu {}
+        // // chương trình sẽ tự = returrn  
+        // const myArrowFunction = (a) =>  a*2;
+        // //tương đương
+        // const myArrowFunctions = (a) =>{
+        //     return a*2
+        // }
+        // //khi chỉ có 1 paramt truyền vào hàm thì k cần cặp dấu ()
+        // const myArrowFunctionss = a =>{
+        //     return a*2
+        // }
+        // console.log(myArrowFunctionss(2));
+
+        // //ex2
+        // const arrs = [2,3,4,5];
+        // //tương tự
+        // // const  doulbleArr=arrs.map( (arr)  => {
+        // //    return arr*2
+        // // })
+        // const  doulbleArr=arrs.map( arr  => arr*2)
+        // console.log(doulbleArr);
+        // //viết hàm in ra tên và đội của thành viên
+        // const users = {
+        //     names : ['doanh','nam','quy'],
+        //     teams : "khát nước",
+        //     teamSumany : function(){
+        //       // this ở đây tương đương vơi users
+        //         return this.names.map( name => {
+        //             return `${name} in the team ${this.teams}`
+        //         })
+        //     }
+        // }
+        // console.log(users.teamSumany());
+        // console.log("============= enhanced object literals =============");
+
+        //ex 3
+
+
+        
+        
+        var functionOfListBook = listBooks =>{
+            let total = 0
+            return {
+                listBook :listBooks, 
+                getSubTotal : function(){
+                    return this.listBook.reduce((total,book) => {
+                        return total + book.price
+                    },0)
+                },
+                getBook : function(nameBook){
+                    return this.listBook.find((book) => {
+                        return book.name === nameBook;
+                    })  
+                }
+            }
+        }
+        const listBooks = [
+            {name:"truyen ki", price:250},
+            {name:"de men", price:200},
+            {name:"cao va tho", price:150}
+        ]
+        
+        var as = functionOfListBook(listBooks)
+        console.log(as.getSubTotal());
+        console.log(as.getBook("truyen ki"));
+
+    </script>
+</body>
+</html>

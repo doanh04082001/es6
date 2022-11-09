@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sử dụng filter</title>
+  </head>
+  <body>
+    <script>
+      //dùng vòng lặp để lấy ra những phần tử / 2 và cho vào mảng mới
+      //cách thông thường
+      var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 == 0) {
+          newArr.push(arr[i]);
+        }
+      }
+      console.log(newArr);
+
+      //cách sử dụng filter và viết function theo es6
+      let newArrFilter = arr.filter((item) => {
+        return item % 2 == 0;
+      });
+      console.log(newArrFilter);
+
+      //filter
+      var products = [
+        { name: "chuối", type: "fruit", quantity: 22, price: 10 },
+        { name: "ngô", type: "not", quantity: 6, price: 1 },
+        { name: "mì tôm", type: "food", quantity: 22, price: 10 },
+        { name: "bánh", type: "food", quantity: 5, price: 6 },
+        { name: "nho", type: "fruit", quantity: 2, price: 0 },
+      ];
+
+      var arrAfter = products.filter((product) => {
+        return (
+          product.type == "food" && product.quantity > 5 && product.price < 20
+        );
+      });
+      console.log(arrAfter);
+
+      // filter những comment thuộc bài viết
+
+      var post = { id: 1, status: "bài viết id = 4" };
+      var listComment = [
+        { id: 1, idPost: 3, content: "nội dung 3" },
+        { id: 2, idPost: 4, content: "nội dung 4" },
+        { id: 3, idPost: 1, content: "nội dung 1" },
+        { id: 4, idPost: 2, content: "nội dung 2" },
+        { id: 5, idPost: 3, content: "nội dung 3" },
+        { id: 6, idPost: 1, content: "nội dung 1 1" },
+      ];
+      //viết kiểu bthg
+      var filterPostId1 = listComment.filter((comment) => {
+        return comment.idPost == post.id;
+      });
+      console.log(filterPostId1);
+
+      //viết kiểu function
+      getListComment = (post, listComment) => {
+        return listComment.filter((comment) => {
+          return comment.idPost == post.id;
+        });
+      };
+      console.log(getListComment(post, listComment));
+
+      //viết kiểu function cho hàm find()
+      findCommentOfPost = (post, listComment) => {
+        return listComment.find((comment) => {
+          return comment.idPost == post.id;
+        });
+      };
+      console.log(findCommentOfPost(post, listComment));
+
+      //findWhere find mảng điều kiện object
+      var ladders = [
+        { id: 1, height: 20 },
+        { id: 3, height: 25 },
+      ];
+
+      findWhere = (arrs,criteria) => {
+        return arrs.find( arr => {
+                       // lấy key của criteria = height hoặc có thể lấy value bằng cách [Object.values(criteria)
+            return arr[Object.keys(criteria)] === criteria[Object.keys(criteria)]
+        })
+      }
+     console.log(findWhere(ladders,{ height: 25 }));
+    </script>
+  </body>
+</html>

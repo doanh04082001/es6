@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Const và Let</title>
+  </head>
+  <body>
+    // let : khi khai báo let trong cặp dấu {} thì nó có thể truy cập ở mọi nơi trong {}
+           : có thể ghi đè lại giá trị
+           : phân biệt chữ hoa và chữ thường
+           : có thể khai báo lại tên biến nhưng phải trong 1 phạm vi khác
+    trong cặp dấu {}
+           : có thể gọi được cả trong hàm
+
+
+    //const: khi khai báo let trong cặp dấu {} thì nó có thể truy cập ở mọi nơi trong {}
+           : không thể ghi đè lại giá trị khác  
+           : không thể khai báo trùng tên
+
+
+    <script type="text/javascript">
+      {
+        // let greeting = "say Hi";
+        // let times = 4;
+
+        // if (times > 3) {
+        //   let greeting = "say hi thay doi";
+        //   let hello = "say Hello instead";
+        //   console.log(greeting); // "say Hello instead"
+        //   console.log(times);
+        // }
+        // function test(){
+        //     times = 9
+        //     console.log(times);
+        // }
+        // test()
+        // console.log(greeting); // hello is not defined
+        console.log("========= CONST =========");
+        const gr = "green";
+        const ke = 11;
+
+        if(ke>1){
+            // gr = "color grenn" // error
+            console.log(gr);
+        }
+        function he(){
+            console.log(ke);
+        }
+        he();
+    
+      };
+
+      
+    </script>
+  </body>
+</html>
