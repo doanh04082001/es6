@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructering</title>
+</head>
+<body>
+    <script>
+//ex 1 :
+    var expence = {
+        type: "dolla",
+        amount : "50 $"
+    }
+    var {type} = expence;
+    var {amount} = expence
+    var {type,amout} = expence
+    document.write(` biến var type = ${type} <br> `);
+    document.write(` biến var amount = ${amount} <br>`);
+    document.write(` biến var type , amount = ${type} , ${amount} `);
+//ex 2 :
+    var saveFile = {
+        name : "repost",
+        extencion : "jpg",
+        size : 255
+    }
+    // cách viết thường
+    function save(file){
+        return `name is : ${file.name} , file ảnh : ${file.extencion}, size : ${file.size}`
+    }
+    console.log(save(saveFile));
+    // cách viết destructuring
+    function saves({name,extencion,size},{user}){
+        return `name is : ${name} , file ảnh : ${extencion}, size : ${size}, tên user : ${user}`
+    }
+    console.log(saves(saveFile,{user : 'nam'}));
+/// Destructurring with array
+//ex 3 : 
+     const car = ["mecs","lambogini","toyota","ford","suzuki"];
+     const [car1,car2,...cars] = car;
+     console.log(car1);
+     console.log(car2);
+     console.log(cars);
+//ex 4
+     const compains = [
+        {name:"facebook", locations:"mỹ"},
+        {name:"zalo", locations:"việt nam"},
+        {name:"wtitter", locations:"anh"},
+        {name:"uber", locations:"san francisco"}
+     ];
+
+     const [fb] = compains;
+     console.log(`${fb.name} location : ${fb.locations}`);
+     const [{locations}] = compains;
+     console.log(locations);
+
+//ex 5
+    console.log("========================");
+    const google = {
+         country : ["mountain","viet nam","lao"],
+         country2 : ["mountain 2","viet nam 2","lao 2"],
+         country3 : ["mountain 3","viet nam 3","lao 3"]
+    }
+    const  { country } = google;  
+    console.log(country);
+
+//ex 6
+    function signupDestructuring({userName,pass,city,age}){
+        return (`${userName} + ${pass} + ${city}+ ${age}`);
+    }
+    function signup(user){
+        return (`${user.userName} + ${user.pass} + ${user.city}+ ${user.age}`);
+    }
+    const user = {
+        userName : "admin@gmail.com",
+        pass : "123456",
+        city : "gvn",
+        age : 20
+    }
+    console.log("==================");
+    console.log(signup(user));
+    console.log(signupDestructuring(user));
+
+    console.log("===");
+    const numberss = [1, 2, 3];
+const newArr = [];
+    function double(numbers) {
+        const [one,two,three] = numbers
+        newArr
+    }
+
+    console.log(double(numberss));
+    
+    </script>
+</body>
+</html>

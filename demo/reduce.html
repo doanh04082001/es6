@@ -45,8 +45,7 @@
         {color : "blue"}
       ]
       var arrPri = listColors.reduce( (previous,colo) => {
-         colo.push(colo.color);
-         return colo
+         return colo.push(colo.color);
       },[] )
       console.log(arrPri);
     </script>

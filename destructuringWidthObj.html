@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring</title>
+</head>
+<body>
+    <script>
+        const obj = { a: 1, b: { c: 2 } };
+        const { a, b } = obj;
+        document.write(`${a}`); // 1
+        document.write(`${b}`); // { c: 2 }
+        const {c} = b
+        document.write(`${c}`); // 2
+
+//========================================================================================================
+        const obj1 = {name : 'js',
+                      price : 150,
+                      des : 'kho hieu',
+                      objChild : {
+                        name : 'nextJs',
+                        price: 200 
+                      }
+                    }
+                                     // lấy name của objChild và đổi tên để không trùng với năm bên ngoài
+        const { name, price,objChild: {name:nameOfObjChild}} = obj1
+        document.write(name); //js
+        document.write(price); // 150
+        // để lấy ra name của objChild thì cần thực hiện: sau khi lấy name thì cần đổi biến name thành tên khác
+        // nếu không sẽ trùng với biến name của objChild
+        document.write(nameOfObjChild) // nextJs
+
+
+//========================================================================================================
+        //Có thể set giá trị mặc định
+        const obj2 = {
+                        name : 'js',
+                        price : 150,
+                        content : "content"
+                     }
+        const{content = "default content"} = obj2
+         //nếu như ojb2 không có content 
+        document.write(content) // default content
+         //như ojb2 có content 
+        document.write(content) //content
+
+        // destructuring argument
+        var saveField = {
+            extension : 'jpg',
+            name : 'repost',
+            size : 14040
+        }
+        function fileSumary(file){
+            return `${file.extension} + ${file.name} + ${file.size}`; 
+        }
+        console.log(fileSumary(saveField)) ; //jpg + repost + 14040 
+
+
+        //có thể truyền vào bằng cú pháp destructuring miễn sao cho các key trùng với object khai báo biên ngoài hàm là dc
+        function fileSumarys({extension,name,size},{color}){
+            return `${extension} + ${name} + ${size} + ${color}`; 
+        }
+        var field = {
+            extension : 'jpgs',
+            name : 'reposts',
+            size : 140400
+        }
+        console.log(fileSumarys(field , {color:"red"})); // jpgs + reposts + 140400 + red
+
+//==================================================================================================================
+        // Destructuring object and array (đồng thời)
+        // tạo ra 1 mảng object
+        const netwWord = [
+            {name : "facebook" , from : "mỹ"},
+            {name : "zalo" , from : "Việt Nam"},
+            {name : "message" , from : "mỹ"},
+            {name : "Uber" , from : "san Fancisco"},
+        ]
+        
+        // lấy ra object đầu tiên. Vì là mảg lên ta có thể đặt tên cho phần tử 
+        const [fb] = netwWord; // {name : "facebook" , from : "mỹ"},
+        console.log(fb); // {name: 'facebook', from: 'mỹ'}
+
+        //lấy name trong object trong mảng và phải đổi tên cho nó nếu không sẽ bị trùng nhau và lỗi
+        const [{from},{from:from2},{from:from3},{from:from4} ] = netwWord;
+        console.log(from); // mỹ
+        console.log(from2); // Việt Nam
+        console.log(from3); // mỹ
+        console.log(from4); // san Fancisco
+
+//==================================================================================================================
+        //mảng trong object
+        const  object = {
+            locations : ['mountain', 'new york','london'],
+            names : ['donah', 'trump','strum'],
+            prices : [100,200,300],  
+        }
+
+        const {locations , prices} = object;
+        console.log(locations); // ['mountain', 'new york', 'london']
+        console.log(prices); // [100, 200, 300]
+
+        // có thể giá trị trong mảng của property  names bằng cách sau
+        const {names : [valueFirst, ,valueThree]} = object
+        console.log(valueFirst); // donah
+        console.log(valueThree); // strum
+//==================================================================================================================
+        function createUser( { userName,passWord,birthDay,city }, {email} ){
+            console.log (userName,passWord,birthDay,city , email);
+        }
+        const user1 = {
+            userName : "phamdoanh",
+            passWord : "12345",
+            birthDay : "01/05/2000",
+            city : "Hà nội"
+        }
+        // có thể truyền thêm property vào
+        createUser(user1,{email : "phamdoanh225@gmail.com"});
+
+//==================================================================================================================
+        const points = [
+            [2,4],
+            [10,5],
+            [3,4]
+        ]
+        const [ones] = points;
+        console.log(ones); // [2,4]
+        var objectPoints = points.map(([x,y])=>{
+            return { x : x,y :y };
+        })
+        console.log(objectPoints);
+    </script> 
+</body>
+</html>
