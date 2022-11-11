@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise</title>
+  </head>
+  <body>
+    <script>
+      //   const newPromise = new Promise((resolve, reject) => {
+      //     setTimeout(() => {
+      //       const a = 5;
+      //       const b = 6;
+      //       a + b == 10 ? resolve() : reject();
+      //     }, 3000);
+      //   });
+      //   newPromise.then(() => {
+      //       console.log("thành công");
+      //     })
+      //     .catch(() => {
+      //       console.log("lỗi");
+      //     });
+      //     const a = 1;
+      //   function myFunction() {
+      //     timeout = setTimeout(sum(a), 1000);
+      //   }
+
+      //   function sum(a) {
+      //     console.log(a+1);
+      //   }
+      //   console.log(myFunction());
+      // function test() {
+      //     setTimeout(() => {
+      //         a+=1;
+      //     }, 1000)
+      // }
+      //   let a = 1;
+      //   function test() {
+      //     return new Promise((resolve, reject) => {
+      //       setTimeout(() => {
+      //         resolve((a += 1));
+      //       }, 1000);
+      //     });
+      //   }
+      //   console.log(test());
+      // Cần lưu ý là kết quả trả về của async function luôn là một Promise.
+      // kết quả của await chả về luôn là 1 promise resolve
+      // async function main () {
+      //     let x = await test();
+      //     console.log(x);
+
+      //     let y = await test();
+      //     console.log(y);
+
+      //     let z = await test();
+      //     console.log(z);
+      // }
+
+      // main();
+
+      // test().then(() => {
+      //     test()
+      //         .then(() => {
+      //             test()
+      //                 .then(() => console.log(a))
+      //         })
+      // })
+
+      // cách tạo promise
+      const namePromise = new Promise(function (resolve, reject) {
+        // trạng thái của promise
+        // + pending : chờ
+        // + fulfilled : thành công
+        // + reject : lỗi
+        // logic xử lí
+        // thành công sẽ gọi đến resolve
+        const data = [{ uses: "doanh" }, { uses: "nam" }];
+        //có thể truyền data sang then qua resolve()
+        // resolve(data)
+        resolve();
+        // thất bại sẽ gọi đến reject
+        // reject("lỗi")
+      });
+      namePromise
+        // .then(function (data) {
+        //     //thành công sẽ thực hiện trong này
+        //     console.log("Succes",data );
+        // })
+        // khái niệm chain (chuỗi)
+        // có nghĩa là nhiều then nối tiếp nhau. kết quả của then này là tham số của then sau
+        // nếu không return ở then() thì sẽ nhảy qua then() tiếp theo
+        // nếu then chả về 1 promise thì sẽ phải đượi promise nó thực hiện xong thì các then tiếp theo mới chạy
+        .then(function () {
+          //thành công sẽ thực hiện trong này
+          return new Promise(function (resolve) {
+            setTimeout(function(){
+                resolve([1,2,3]) 
+            }, 2000);
+          });
+        })
+        // .then(function () {
+        //     //thành công sẽ thực hiện trong này
+        //     return 1;
+        // })
+        .then(function (data) {
+          // data sẽ = 1 vì ở then trên chả xuống
+          console.log("data then 1 ở đây " + data);
+          return data + 1;
+        })
+        .then(function (data) {
+          // data sẽ = 2 vì ở then trên chả xuống
+          console.log("data then 2 ở đây " + data);
+          return data + 1;
+        })
+        .then(function (data) {
+          // data sẽ = 3 vì ở then trên chả xuống
+          console.log("data then 3 ở đây " + data);
+          return data + 1;
+        })
+        .catch(function () {
+          //thất bại sẽ thực hiện trong này
+          console.log("error");
+        })
+        .finally(function () {
+          //thành công hay thất bại đều gọi vào đây
+          console.log("done");
+        });
+
+      //ví dụ callback hell
+      // console.log("=======================");
+
+      // var set = setTimeout(function(){
+      //    console.log(1);
+      //     setTimeout(function(){
+      //         console.log(2);
+      //         setTimeout(function(){
+      //             console.log(3);
+      //     },1000)
+      //     },1000)
+      // },2000)
+      // console.log(set);
+    </script>
+  </body>
+</html>

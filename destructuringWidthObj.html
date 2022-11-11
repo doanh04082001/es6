@@ -14,7 +14,8 @@
         document.write(`${b}`); // { c: 2 }
         const {c} = b
         document.write(`${c}`); // 2
-
+       const {b:{c:doanh}}  = obj
+        console.log(doanh);
 //========================================================================================================
         const obj1 = {name : 'js',
                       price : 150,
@@ -24,7 +25,7 @@
                         price: 200 
                       }
                     }
-                                     // lấy name của objChild và đổi tên để không trùng với năm bên ngoài
+                                     // lấy name của objChild và đổi tên để không trùng với name bên ngoài
         const { name, price,objChild: {name:nameOfObjChild}} = obj1
         document.write(name); //js
         document.write(price); // 150

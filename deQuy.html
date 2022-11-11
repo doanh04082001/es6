@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đệ quy</title>
+</head>
+<body>
+    <script>
+        class Comment{
+            constructor(content, chilren){
+                this.content = content,
+                this.chilren = chilren
+            }
+        }
+        const chilren = [
+            new Comment("comment 1 ", []),
+            new Comment("comment 2 ", []),
+            new Comment("comment 3 ", []),
+        ]
+        const tree = new Comment("comment 4" , "chilren");
+
+        console.log(chilren);
+        console.log(tree);
+
+    </script>
+</body>
+</html>

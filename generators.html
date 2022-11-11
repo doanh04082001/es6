@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generators</title>
+</head>
+<body>
+    <!-- cho phép chúng ta làm việc với function và iterator là Generator
+    (hay hàm sinh). Generator là function có thể thể dừng giữa chừng 
+    và sau đó tiếp tục từ chỗ mà nó đã dừng. Nói một cách ngắn gọn thì 
+    generators nó là iterator đội lốt function =)) -->
+    <script>
+// one quick thing forr of loops( một điều nhanh chóng cho vòng lặp )====================================================
+    // tạo hàm  
+    // const users = [
+    //     {id:1,poin:4},
+    //     {id:2,poin:6},
+    //     {id:3,poin:7},
+    //     {id:4,poin:8},
+    //     {id:5,poin:111},
+    // ];
+    // //lấy poin > 10
+    // const userPoin = [];
+    // users.forEach(function(item){
+    //     if(item.poin>10){
+    //         userPoin.push(item);
+    //     }  
+    // });
+    // console.log(userPoin);
+
+    
+    // //tính tổng poin .reduce
+    // const sumPoin  = users.reduce((sum,user)=>{
+    //    return sum + user.poin;
+    // },0)
+    // console.log(sumPoin);
+
+    // //kiểm tra xem có phải tất cả user có poin > 5
+    // const checkPoinUser = users.every((item)=>{
+    //     if(item.poin > 5) {
+    //         return true;
+    //     }else{
+    //         return false
+    //     }
+        
+    // })
+    // console.log(checkPoinUser);
+
+    // //kiểm tra xem mamgr có chứa 1 user có user  poin > 50 
+    // const checkPoinUser50 = users.some((item)=> item.poin > 50)
+    // console.log(checkPoinUser50);
+
+    // //lấy ra 1 mảng chỉ chứa số poin
+    // const newArr = users.map((item)=>{
+    //     return (item.poin)
+    // })
+    // console.log(newArr);
+// ex 2 ==============================================================================================================
+    function *colors(){
+        yield 'red';
+        yield 'blue';
+        yield 'green'
+        yield 'greens'
+    }
+
+    const genz = colors();
+    // mỗi một lần gọi next thì sẽ sẽ ra phần yield theo thứ thự
+    console.log(genz.next()); // red , done:false
+    console.log(genz.next()); // blue , done:false 
+    console.log(genz.next()); // green , done:false
+    console.log(genz.next()); // greens , done:false
+    console.log(genz.next()); // underfined , done:true
+
+    // có thể gọi cả function vào trong vòng lặp
+    const myColor = [];
+    for(let color of colors()){
+        myColor.push(color)
+    }
+    console.log(myColor);
+
+// ex 3 =====================================================================================================================================================
+    
+    const testTeam = {
+        lead : "Doanh",
+        manager : "Nam",
+        tester : "bốp",
+        [Symbol.iterator] : function* (){
+            yield this.lead,
+            yield this.tester
+            yield 5
+            // yield this
+        }
+    }
+    const engineeringTeam  = {
+        //có thể gọi object khác vào đây,(nên để ở đầu)
+        testTeam,
+        size : 3,
+        department: "Enginerring",
+        lead : "Jill",
+        manager : "Alex",
+        engineer : "Dave"
+    }
+    function *TesttingTeamIterator(team){
+        yield team.lead;
+        yield team.tester;
+    }
+
+    function *TeamIterator(team){
+        yield team.size;
+        yield team.lead;
+        yield team.manager;
+        yield team.testTeam.manager;
+        // gọi hàm TesttingTeamIterator
+        // vì hàm TesttingTeamIterator lấy 2 giá trị doanh , bốp 
+        //nên ở đây cũng gọi dc
+        // const testingTeamGenerator = TesttingTeamIterator(team.testTeam);
+        // yield* testingTeamGenerator;
+
+        yield* team.testTeam;
+    } 
+    const names = []
+    for(let name of TeamIterator(engineeringTeam)){
+        names.push(name);
+    }
+    console.log(names); // [3,"Jill","Alex","Nam","Doanh","bốp",5]
+
+// ex 4 Cách viết ngawsn gọn hơn =================================================================================================================================
+    const testTeams = {
+        lead : "Doanh",
+        manager : "Nam",
+        tester : "bốp",
+        [Symbol.iterator] : function* (){
+            yield this.lead,
+            yield this.tester
+            yield 5
+            // yield this
+        }
+    }
+    const engineeringTeams  = {
+        //có thể gọi object khác vào đây,(nên để ở đầu)
+        testTeams,
+        size : 3,
+        department: "Enginerring",
+        lead : "Jill",
+        manager : "Alex",
+        engineer : "Dave",
+        [Symbol.iterator] : function*(){
+            yield this.size,
+            yield this.lead,
+            yield this.manager
+            yield* this.testTeams
+        }
+    }
+
+    const namess = []
+    for(let name of engineeringTeams){
+        namess.push(name);
+    }
+    console.log(namess);
+    
+    </script>
+</body>
+</html>

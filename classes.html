@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Classes</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        class Car {
-            //hàm khởi tạo
-            constructor({title}){
-                this.title=title;
-            }
-            drive() {
-              return this.title;  
-            }
-            //nếu khai báo hàm có từ function sẽ không đúng với cú pháp trong classes es6
-
+      class Car {
+        //hàm khởi tạo
+        constructor({ title }) {
+          this.title = title;
         }
-        const car = new Car({title : "Toyota vios"});
-        console.log(car.drive()); 
-
-        // mở rộng phạm vi của classes (extanding Behavior)
-
-        class Toyota extends Car{
-            constructor(options,content = "default content"){
-                super(options)
-                this.color = options.color
-                this.content = content
-            }
-            honk(){
-                return "Value Hook";
-            }
-            // nếu như không khai báo hàm drive trong class toyota thì nó sẽ lấy hàm drive ở class car
-            drive() {
-              return "thử xem" + this.title;  
-            }
+        drive() {
+          return this.title;
         }
-        const vios = new Toyota({color : "red", title : "toyota"});
-        console.log(vios.drive());
+        //nếu khai báo hàm có từ function sẽ không đúng với cú pháp trong classes es6
+      }
+      const car = new Car({ title: "Toyota vios" });
+      console.log(car.drive());
+
+      // mở rộng phạm vi của classes (extanding Behavior)
+
+      class Toyota extends Car {
+        constructor(options, content = "default content") {
+          super(options);
+          this.color = options.color;
+          this.content = content;
+        }
+        honk() {
+          return "Value Hook";
+        }
+        // nếu như không khai báo hàm drive trong class toyota thì nó sẽ lấy hàm drive ở class car
+        drive() {
+          return "thử xem" + this.title;
+        }
+      }
+      const vios = new Toyota({ color: "red", title: "toyota" });
+      console.log(vios.drive());
+
+      class Monster {
+        constructor({health}) {
+          this.health = health;
+        }
+      }
+      const a = new Monster({ health: 100 });
+      console.log(a);
     </script>
-</body>
+  </body>
 </html>
