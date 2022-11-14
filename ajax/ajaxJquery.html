@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax trong jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <p id ="noidung"></p>
+    <p id ="noidung2"></p>
+    <button type="button" id="load-du-lieu"> load data</button>
+    <script>
+        $(document).ready(function() {
+        $('#load-du-lieu').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    a: "content abc",
+                    b: "content bcd"
+                }
+            }).done(function(ketqua) {
+                $('#noidung').html(ketqua);
+            });
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'GET',
+                dataType: 'html',
+                // data: {
+                //     a: "content abc",
+                //     b: "content bcd"
+                // }
+            }).done(function(ketquas) {
+                $('#noidung2').html(ketquas);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

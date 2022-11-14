@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>lấy image ảnh bằng promise</h1>
+    <img id="img1" alt="" />
+    <img id="img2" alt="" />
+    <img id="img3" alt="" />
+    <img id="img4" alt="" />
+    <img id="img5" alt="" />
+    <img id="img6" alt="" />
+
+    <script type="text/javascript">
+      function httpGetAsync(theUrl, resolve) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            resolve(xmlHttp);
+        };
+        xmlHttp.open("GET", theUrl, true);
+        xmlHttp.send(null);
+      }
+      const promise1 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve);
+      });
+      const promise2 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve);
+      });
+      const promise3 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve);
+      });
+      promise1
+        .then((data) => {
+          $("#img1").attr("src", data.responseURL);
+          // có thể gọi 1 promise tiếp bằng cách returrn promise 2
+          // then tiếp theo chính là kết quả của promise cuối cùng
+          return promise2;
+        })
+        .then((data) => {
+          $("#img2").attr("src", data.responseURL);
+          return promise3;
+        })
+        .then((data) => {
+          $("#img3").attr("src", data.responseURL);
+        });
+
+
+// async , await cùng với ví dụ trên
+      const promise4 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve);
+      });
+      const promise5 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve,reject);
+      });
+      const promise6 = new Promise((resolve, reject) => {
+        httpGetAsync("https://picsum.photos/200/300", resolve);
+      });
+      const excuteAsyncn = async () => {
+        //sẽ thực hiện giống dồng bộ từ trên xuống
+        // đượi promise 4 trả về kq và gắn cho biến response4
+        //sử lí lỗi như sau: bọ trong try catch
+        try {
+          const response4 = await promise4;
+          $("#img4").attr("src", response4.responseURL);
+          const response5 = await promise5;
+          $("#img5").attr("src", response5.responseURL); // nếu ở đây mà lỗi thì sẽ k thực hiện các code ở dưới nữa
+          const response6 = await promise6;
+          $("#img6").attr("src", response6.responseURL);
+        } catch {
+          //nếu promise lỗi và gọi đến reject thì sẽ nhảy vào đây
+          console.log("lỗi");
+        }
+      };
+      excuteAsyncn();
+    </script>
+  </body>
+</html>

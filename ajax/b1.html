@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <p id="output"></p>
+  </head>
+  <body>
+    <script type="text/javascript">
+      const url = "https://fakestoreapi.com/products";
+      // khởi tạo request lên sever
+      const xhr = new XMLHttpRequest();
+      const output = $("#output");
+      // khi request gửi lên serve và thay đổi trạng thái thì sẽ gọi function sử lí kết quả
+      xhr.onreadystatechange = handleResult;
+      // đối tượng xhr đã mở kết nối đến server
+      xhr.open("GET", url);
+      // gửi yêu cầu lên serve
+      xhr.send();
+    // có thể gửi dữ liệu lên qua
+    //   xhr.open("POST", url);
+    // dữ liệu gửi lên serve
+    //   xhr.send("gì cũng đưuọc");
+      function handleResult() {
+        // if (xhr.readyState === XMLHttpRequest.DONE) {
+        //   output.html(xhr.responseText);
+        // }
+        if (xhr.readyState === XMLHttpRequest.UNSENT) {
+         console.log("Khởi tạo kết nối");
+        } else if (xhr.readyState === XMLHttpRequest.OPENED) {
+         console.log("Mở kết nối");
+        }else if (xhr.readyState === XMLHttpRequest.LOADING) {
+         console.log("Đang tải nội dung");
+        }else if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+         console.log("Header đã được nhận");
+        }else if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log("Hoàn thành");
+            output.html(xhr.responseText);
+        }
+    }
+    </script>
+  </body>
+</html>

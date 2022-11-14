@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise all</title>
+</head>
+<body>
+    <script>
+        // promisse all sẽ chạy đồng thời và xong xong các promise
+        // nếu 1 trong các promise bị reject thì tất cả các promise trong promise.all sẽ dừng và chuyển luôn vào catch
+        var promise1 = new Promise(
+            function(resolve){
+                setTimeout(()=>{
+                    resolve([1])
+                },1000)
+            }
+        );
+
+        var promise2 = new Promise(
+            function(resolve){
+                setTimeout(()=>{
+                    resolve([2,3])
+                },3000)
+            }
+        );
+        // promisse all sẽ đợi khi các promise có trong danh sách thự hiện xong mới in ra kq
+        Promise.all([promise1,promise2])
+                .then(function(result){
+                    console.log(result);
+                })
+    </script>
+</body>
+</html>
